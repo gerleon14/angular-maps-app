@@ -1,1 +1,13 @@
-<p>zoom-range works!</p>
+<div #map class="map-container"></div>
+
+<div class="row">
+  <div class="col-12">
+    <label lass="form-label"> Zoom: 16 - Lng, Lat: [123, 456] </label>
+    <input type="range" class="form-range" />
+  </div>
+
+  <div class="col-12">
+    <button class="btn btn-primary" (click)="zoomIn()">+</button>
+    <button class="btn btn-primary float-end" (click)="zoomOut()">-</button>
+  </div>
+</div>
