@@ -1,7 +1,7 @@
 <div class="row mt-3">
   <div class="col-2"></div>
   <div class="col">
-    <h2>Lista de propiedades</h2>
+    <h2>Lista de Encargos</h2>
     <hr />
   </div>
 </div>
@@ -10,15 +10,15 @@
   <div class="col-2"></div>
   <div class="col">
     <div class="row">
-      <div class="col-4 mb-2" *ngFor="let propiedad of propiedades">
+      <div class="col-4 mb-2" *ngFor="let encargo of encargos">
         <div class="card">
           <app-min-map
             class="card-img-top"
-            [center]="propiedad.lngLat"
+            [center]="encargo.lngLat"
           ></app-min-map>
           <div class="card-body">
-            <h5 class="card-title">{{ propiedad.titulo }}</h5>
-            <p class="card-text">{{ propiedad.descripcion }}</p>
+            <h5 class="card-title">{{ encargo.titulo }}</h5>
+            <p class="card-text">{{ encargo.descripcion }}</p>
           </div>
         </div>
       </div>

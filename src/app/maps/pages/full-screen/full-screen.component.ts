@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { EncargosService } from '../../services/encargos.service';
 import * as mapboxgl from 'mapbox-gl';
 
 @Component({
@@ -15,14 +15,25 @@ import * as mapboxgl from 'mapbox-gl';
   ],
 })
 export class FullScreenComponent implements OnInit {
-  constructor() {}
+  map!: mapboxgl.Map;
+
+  constructor(private encargosService: EncargosService) {}
 
   ngOnInit(): void {
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-74.80050079279056, 10.92720608875137],
+      center: [-2.92528, 43.26271],
       zoom: 16,
     });
+
+    // Obtén los encargos y agrégalos al mapa
+    // this.encargosService.getEncargos().subscribe((encargos) => {
+    //   encargos.forEach((encargo) => {
+    //     new mapboxgl.Marker({ color: encargo.color })
+    //       .setLngLat(encargo.location)
+    //       .addTo(this.map);
+    //   });
+    // });
   }
 }

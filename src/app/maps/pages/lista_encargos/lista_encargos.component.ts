@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Propiedad {
+interface Encargo {
   titulo: string;
   descripcion: string;
   lngLat: [number, number];
 }
 
 @Component({
-  selector: 'app-properties',
-  templateUrl: './properties.component.html',
+  selector: 'app-lista_encagos',
+  templateUrl: './lista_encargos.component.html',
 })
-export class PropertiesComponent implements OnInit {
-  propiedades: Propiedad[] = [
+export class ListaEncargosComponent implements OnInit {
+  encargos: Encargo[] = [
     {
       titulo: 'Casa residencial, Canadá',
-      descripcion: 'Bella propiedad en Katana, Canadá',
+      descripcion: 'Bella Encargo en Katana, Canadá',
       lngLat: [-75.92722289474008, 45.280015511264466],
     },
     {

@@ -1,44 +1,45 @@
+// encargos.component.ts
+// encargos.component.ts
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { EncargosService } from '../../services/encargos.service';
 import * as mapboxgl from 'mapbox-gl';
 
-interface MarkerColor {
+interface EncargoColor {
   color: string;
   marker?: mapboxgl.Marker;
   center?: [number, number];
 }
 
 @Component({
-  selector: 'app-markers',
-  templateUrl: './markers.component.html',
+  selector: 'app-encargos',
+  templateUrl: './encargos.component.html',
   styles: [
     `
       .map-container {
         height: 100%;
         width: 100%;
       }
-
       .list-group {
         position: fixed;
         right: 20px;
         top: 20px;
         z-index: 9999;
       }
-
       .list-group-item {
         cursor: pointer;
       }
     `,
   ],
 })
-export class MarkersComponent implements AfterViewInit {
+export class EncargosComponent implements AfterViewInit {
   map!: mapboxgl.Map;
   zoomLevel: number = 15;
-  center: [number, number] = [-74.80050079279056, 10.92720608875137];
-  markerArr: MarkerColor[] = [];
+  center: [number, number] = [-2.92528, 43.26271];
+  markerArr: EncargoColor[] = [];
 
   @ViewChild('map') mapDiv!: ElementRef;
 
-  constructor() {}
+  constructor(private encargosService: EncargosService) {}
 
   ngAfterViewInit(): void {
     this.map = new mapboxgl.Map({
@@ -48,11 +49,41 @@ export class MarkersComponent implements AfterViewInit {
       zoom: this.zoomLevel,
     });
 
-    this.getMarkersStorage();
+    this.loadEncargos();
+  }
+
+  loadEncargos() {
+    this.encargosService.getEncargos().subscribe((encargos) => {
+      encargos.forEach((encargo) => {
+        const direccion = encargo.activo?.direccion;
+        if (direccion && direccion.lat !== undefined && direccion.lng !== undefined) {
+          const color = this.getRandomColor();
+
+          const newMarker = new mapboxgl.Marker({
+            draggable: false,
+            color,
+          })
+            .setLngLat([direccion.lng, direccion.lat])
+            .addTo(this.map);
+
+          this.markerArr.push({
+            color,
+            marker: newMarker,
+            center: [direccion.lng, direccion.lat],
+          });
+        }
+      });
+    });
+  }
+
+  // Método para obtener un color aleatorio
+  getRandomColor(): string {
+    return '#xxxxxx'.replace(/x/g, (y) =>
+      ((Math.random() * 16) | 0).toString(16)
+    );
   }
 
   addMarker() {
-    //Color aleatorio
     const color = '#xxxxxx'.replace(/x/g, (y) =>
       ((Math.random() * 16) | 0).toString(16)
     );
@@ -72,14 +103,14 @@ export class MarkersComponent implements AfterViewInit {
     });
   }
 
-  moveMarker({ marker }: MarkerColor) {
+  moveMarker({ marker }: EncargoColor) {
     this.map.flyTo({
       center: marker!.getLngLat(),
     });
   }
 
   saveInStorage() {
-    const markerStorage: MarkerColor[] = this.markerArr.map((marker) => {
+    const markerStorage: EncargoColor[] = this.markerArr.map((marker) => {
       const { lng, lat } = marker.marker!.getLngLat();
 
       return {
@@ -93,7 +124,7 @@ export class MarkersComponent implements AfterViewInit {
 
   getMarkersStorage() {
     if (localStorage.getItem('markers')) {
-      const markers: MarkerColor[] = JSON.parse(
+      const markers: EncargoColor[] = JSON.parse(
         localStorage.getItem('markers')!
       );
 

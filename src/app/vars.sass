@@ -1,0 +1,47 @@
+/* ESTRUCTURA */
+/* ========== */
+/* ! Las variables que dimensionan la estructura principal deben ir por % o por rem. */
+
+
+$planificador-ancho:		100%
+$planificador-alto:			min(100%, 100vh)
+$barracom-alto:				0.05rem
+$selector-alto:				3.8rem
+$panel-ancho:				100%
+$timeline-alto:				2.2rem
+$selecgrupos-alto:			30%
+
+
+// Revisar las siguientes si se modifican las anteriores. Es muy problemático calcular con variables https://stackoverflow.com/a/39194239, debemos hacerlo hard coded, codigo fuerte sería?
+$panel-alto:				calc(100% - 0.05rem - 3.8rem - 30%)	//	100% - barracom-alto - selector-alto - selecgrupos-alto			
+
+$gantt-alto:				calc(100% - 2rem)					// 100% - timeline-alto - sinasignar-alto 	
+$gantt-filas-scroll-alto:	calc(100% - 3rem) 					// 100% - sinasignar-alto 					
+
+$gantt-filas-alto:			3rem
+$gantt-colgrupos-ancho:		7rem
+$gantt-colsinprg-ancho:		1rem						
+$gantt-colencargos-ancho:	calc(100% - 7rem - 1rem)				//	100% - gantt-colgrupos-ancho - gantt-colsinprg-ancho
+
+
+/* COLORES */
+/* ======= */
+
+
+$col-intervalos-sep:		#77f
+$col-intervalos-fondo:		#eef
+$col-filas-sep:				#aaa
+$col-encargos-lim:			#ccc
+
+$col-enc-tx-hest:			#000
+
+$col-enc-bck-aceptada:		rgba(200,255,200,.8)
+
+$col-fondos:				#cce0ee
+$col-grupo:					#eef
+$col-grupo-sinasignar:		#fee
+
+/* Encargo */
+$col-einf-objeto:			#555
+
+

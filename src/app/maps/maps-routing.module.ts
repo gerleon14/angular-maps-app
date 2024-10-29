@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FullScreenComponent } from './pages/full-screen/full-screen.component';
-import { MarkersComponent } from './pages/markers/markers.component';
-import { PropertiesComponent } from './pages/properties/properties.component';
-import { ZoomRangeComponent } from './pages/zoom-range/zoom-range.component';
+import { EncargoComponent } from './pages/encargos/encargos.component';
+import { ListaEncargosComponent } from './pages/lista_encargos/lista_encargos.component';
 
 const routes: Routes = [
   {
@@ -15,15 +14,11 @@ const routes: Routes = [
       },
       {
         path: 'markers',
-        component: MarkersComponent,
+        component: EncargoComponent,
       },
       {
-        path: 'properties',
-        component: PropertiesComponent,
-      },
-      {
-        path: 'zoom-range',
-        component: ZoomRangeComponent,
+        path: 'lista_encargos',
+        component: ListaEncargosComponent,
       },
       {
         path: '**',
