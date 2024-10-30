@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FullScreenComponent } from './pages/full-screen/full-screen.component';
-import { EncargoComponent } from './pages/encargos/encargos.component';
-import { ListaEncargosComponent } from './pages/lista_encargos/lista_encargos.component';
+import { FullScreenComponent } from '../full-screen/full-screen.component';
+import { EncargosComponent } from '../encargos/encargos.component';
+import { ListaEncargosComponent } from '../lista_encargos/lista_encargos.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'markers',
-        component: EncargoComponent,
+        component: EncargosComponent,
       },
       {
         path: 'lista_encargos',

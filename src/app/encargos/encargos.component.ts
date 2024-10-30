@@ -1,8 +1,8 @@
 // encargos.component.ts
 // encargos.component.ts
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { EncargosService } from '../../services/encargos.service';
 import * as mapboxgl from 'mapbox-gl';
+import { StatusService } from '../status.service';
 
 interface EncargoColor {
   color: string;
@@ -39,7 +39,7 @@ export class EncargosComponent implements AfterViewInit {
 
   @ViewChild('map') mapDiv!: ElementRef;
 
-  constructor(private encargosService: EncargosService) {}
+  constructor(private encargosService: StatusService) {}
 
   ngAfterViewInit(): void {
     this.map = new mapboxgl.Map({
@@ -53,19 +53,26 @@ export class EncargosComponent implements AfterViewInit {
   }
 
   loadEncargos() {
-    this.encargosService.getEncargos().subscribe((encargos) => {
-      encargos.forEach((encargo) => {
-        const direccion = encargo.activo?.direccion;
+    // Start loading encargos programados
+    this.encargosService.grupoencargos_sin_asignar.start(true);
+  
+    // Assuming 'encargos_prog' returns an array directly.
+    const encargosProg = this.encargosService.grupoencargos_sin_asignar.encargos_prog;
+  
+    if (Array.isArray(encargosProg)) {
+      encargosProg.forEach((encargo) => {
+        // const direccion = encargo.activo_id;
+        var direccion = { lat: 0, lng: 0 };
         if (direccion && direccion.lat !== undefined && direccion.lng !== undefined) {
           const color = this.getRandomColor();
-
+  
           const newMarker = new mapboxgl.Marker({
             draggable: false,
             color,
           })
             .setLngLat([direccion.lng, direccion.lat])
             .addTo(this.map);
-
+  
           this.markerArr.push({
             color,
             marker: newMarker,
@@ -73,8 +80,11 @@ export class EncargosComponent implements AfterViewInit {
           });
         }
       });
-    });
+    } else {
+      console.error('Error: encargos_prog is not an array', encargosProg);
+    }
   }
+  
 
   // Método para obtener un color aleatorio
   getRandomColor(): string {

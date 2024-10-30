@@ -18,7 +18,6 @@ import { MatSelectModule		} from '@angular/material/select'
 
 ///	Fechas: Angular material con MatMomentDateModule
 import { MatDatepickerModule	} from '@angular/material/datepicker'
-import { MatMomentDateModule	} from '@angular/material-moment-adapter' // http://brickydev.com/angular-material-datepicker-with-many-custom-date-formats/
 // import {MatNativeDateModule} from '@angular/material/core';
 // import { NativeDateAdapter } from '@angular/material';
 import { MatFormFieldModule		} from '@angular/material/form-field'
@@ -41,12 +40,13 @@ export const FORMAT = {
 import { ReactiveFormsModule } from '@angular/forms';
 ///	Drag n Drop
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { MenuComponent } from './shared/components/menu/menu.component';
+import { MenuComponent } from './menu/menu.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +61,7 @@ import { MenuComponent } from './shared/components/menu/menu.component';
     MatSelectModule,
     
     MatDatepickerModule ,
-    MatMomentDateModule, // http://brickydev.com/angular-material-datepicker-with-many-custom-date-formats/
+    
     // MatNativeDateModule,
     // NativeDateAdapter,
     MatFormFieldModule,
@@ -72,6 +72,7 @@ import { MenuComponent } from './shared/components/menu/menu.component';
     ///	Drag n Drop
     DragDropModule,
     AppRoutingModule,
+    RouterModule
     
     ],
   providers: [

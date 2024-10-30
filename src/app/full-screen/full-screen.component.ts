@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EncargosService } from '../../services/encargos.service';
+import { StatusService }		from '../status.service';
 import * as mapboxgl from 'mapbox-gl';
 
 @Component({
@@ -17,7 +17,9 @@ import * as mapboxgl from 'mapbox-gl';
 export class FullScreenComponent implements OnInit {
   map!: mapboxgl.Map;
 
-  constructor(private encargosService: EncargosService) {}
+  constructor(
+    //public statusService: StatusService
+  ) {}
 
   ngOnInit(): void {
     this.map = new mapboxgl.Map({

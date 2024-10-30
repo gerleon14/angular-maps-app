@@ -494,8 +494,21 @@ export class StatusService implements  OnDestroy {
 	public		calendario_h			= new FormControl(8)
 	public	get tini					() 		{ return new Date(this.trango.get('tini').value) }	///	Debemos generar nuevo Date, porque puede venir como objeto Moment.js si estamos utilizando MatMomentAdapter
 	public	get tfin					() 		{ return new Date(this.trango.get('tfin').value) }	///	Debemos generar nuevo Date, porque puede venir como objeto Moment.js si estamos utilizando MatMomentAdapter
-	public	set tini					(v:any) { this.trango.setValue({tini:v}) }
-	public	set tfin					(v:any) { this.trango.setValue({tfin:v}) }
+	
+	/* CAMBIOS REALIZADOS */
+	public set tini(v: any) {
+		this.trango.setValue({
+			tini: v,
+			tfin: this.trango.value.tfin // retain the current value of tfin
+		});
+	}
+	
+	public set tfin(v: any) {
+		this.trango.setValue({
+			tini: this.trango.value.tini, // retain the current value of tini
+			tfin: v
+		});
+	}
 	public	get	tini_iso 				() 		{ let t=this.tini; 	if(t)return t.toISOString()}
 	public	get	tfin_iso 				() 		{ let t=this.tfin; 	if(t)return t.toISOString()}
 	public	get	tini_ms					() 		{ let t=this.tini; if(t)return (new Date(t).getTime()) }	

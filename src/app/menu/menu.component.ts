@@ -19,15 +19,15 @@ interface MenuItem {
 export class MenuComponent {
   menuItems: MenuItem[] = [
     {
-      route: '/maps/fullscreen',
+      route: './fullscreen',
       name: 'Mapa',
     },
     {
-      route: '/maps/markers',
+      route: './encargos',
       name: 'Encargos',
     },
     {
-      route: '/maps/lista_encargos',
+      route: './lista_encargos',
       name: 'Lista de Encargos',
     },
   ];
